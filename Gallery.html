@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven Ronney-Gallery</title>
+    <link rel="shortcut Icon" type="image/png" href="Ibin30.jpg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #FDE8D1; 
+            color: #000000; 
+        }
+
+        .header {
+            background-color: #8C5A2D;
+            color: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .banner {
+            position: relative;
+            background: url('Ibin9.jpg') no-repeat center center/cover;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .banner h2 {
+            font-size: 160px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .carousel-container {
+            position: relative;
+            margin: 30px auto;
+            max-width: 1000px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-track img {
+            width: 100%;
+            flex: 0 0 100%;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .carousel-btn.left {
+            left: 10px;
+        }
+
+        .carousel-btn.right {
+            right: 10px;
+        }
+
+        .image-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+
+        .image-box {
+            width: 400px;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-box img:hover {
+            transform: scale(1.1);
+        }
+
+        .collage {
+            display: flex;
+            justify-content: center;
+            margin: 30px auto;
+            max-width: 1000px;
+        }
+
+        .collage img {
+            width: 100%;
+            max-width: 1000px; 
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .collage img:hover {
+            transform: scale(1.05); 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-section {
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #EFCBA7;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+        }
+
+        .quote-section h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .quote-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .quote-section img {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quote-section img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            background-color: #8C5A2D; 
+            color: white;
+            font-size: 12px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            color: black;
+            font-size: 24px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>STEVEN RONNEY</h1>
+        <div class="nav">
+            <a href="Home.html">HOME</a>
+            <a href="Biodata.html">BIODATA</a>
+            <a href="Experience.html">EXPERIENCE</a>
+            <a href="Education.html">EDUCATION</a>
+            <a href="Family.html">FAMILY</a>
+            <a href="Gallery.html">GALLERY</a>
+            <a href="Contact.html">CONTACT</a>
+        </div>
+    </div>
+
+    <div class="banner">
+        <h2>GALLERY</h2>
+    </div>
+
+    <div class="carousel-container">
+        <button class="carousel-btn left" onclick="moveSlide(-1)">&#10094;</button>
+        <div class="carousel-track" id="carouselTrack">
+            <img src="Ibin41.jpg" alt="Carousel Image 1">
+            <img src="Ibin42.jpg" alt="Carousel Image 2">
+            <img src="Ibin43.jpg" alt="Carousel Image 3">
+            <img src="Ibin44.jpg" alt="Carousel Image 4">
+        </div>
+        <button class="carousel-btn right" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <div class="image-boxes">
+        <div class="image-box">
+            <img src="Ibin13.jpg" alt="Image Box 1">
+        </div>
+        <div class="image-box">
+            <img src="Ibin14.jpg" alt="Image Box 2">
+        </div>
+        <div class="image-box">
+            <img src="Ibin22.jpg" alt="Image Box 3">
+        </div>
+        <div class="image-box">
+            <img src="Ibin24.jpg" alt="Image Box 4">
+        </div>
+    </div>
+
+    <div class="collage">
+        <img src="IbinCollage.png" alt="Collage Image" width="1000">
+    </div>
+
+    <div class="quote-section">
+        <h3>Inspirational Quote</h3>
+        <p>"PLEASE DO NOT IGNORE THIS IMAGE!"</p>
+        <img src="Quotes.jpg" alt="Inspirational Quote Image" onclick="openModal()">
+    </div>
+
+    <div class="modal" id="quoteModal">
+        <button class="modal-close" onclick="closeModal()">X</button>
+        <img src="Quotes.jpg" alt="Inspirational Quote Modal">
+    </div>
+
+    <footer>
+        &copy; 2024 STEVEN RONNEY. ALL RIGHTS RESERVED. DISCLAIMER: THIS IS ONLY FOR EDUCATIONAL USE. IMD318
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+
+        function moveSlide(step) {
+            const track = document.getElementById("carouselTrack");
+            const totalSlides = track.children.length;
+
+            currentIndex = (currentIndex + step + totalSlides) % totalSlides;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function openModal() {
+            document.getElementById("quoteModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("quoteModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
